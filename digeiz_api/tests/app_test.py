@@ -11,7 +11,12 @@ from flask_sqlalchemy import SQLAlchemy
 from app import app
 db = SQLAlchemy(app)
 
+#for testing
 TEST_DB = "data_app.db"
+NAME = "asmaa"
+ID = 1
+MALLNAME = "plaisir"
+UNITNAME = "zara"
 
 @pytest.fixture
 def client():
@@ -33,7 +38,7 @@ def test_index(client):
 
 def test_database(client):
     """Initial test. ensure that the database exists."""
-    tester = Path("data_app.db").is_file()
+    tester = Path(TEST_DB).is_file()
     assert tester
 """
 ************************************************************************
@@ -50,13 +55,13 @@ def test_get_accounts(client):
 def test_post_account(client):
     """Ensure that user can post messages."""
     response = client.post("/account", data=dict(
-        name="asmaa"), follow_redirects=True)
+        name=NAME), follow_redirects=True)
     assert response.status_code == 201
 
 
 def test_delete_account(client):
     """Test API can delete an existing account. (DELETE request)."""
-    response = client.delete('/account/asmaa')
+    response = client.delete('/account/'+NAME)
     assert response.status_code == 200
 
 """
@@ -73,14 +78,14 @@ def test_get_malls(client):
 
 def test_post_mall(client):
     """Ensure that user can post a mall."""
-    response = client.post("/mall/le chesney", data=dict(
+    response = client.post("/mall/"+MALLNAME, data=dict(
         address="le chesney", account_id=1), follow_redirects=True)
     assert response.status_code == 201
 
 
 def test_delete_mall(client):
     """Test API can delete an existing mall. (DELETE request)."""
-    response = client.delete('/mall/le chesney')
+    response = client.delete('/mall/'+MALLNAME)
     assert response.status_code == 200
 
 """
@@ -98,11 +103,11 @@ def test_get_units(client):
 def test_post_unit(client):
     """Ensure that user can post unit."""
     response = client.post("/unit", data=dict(
-        name="mango", mall_id=1), follow_redirects=True)
+        name=UNITNAME, mall_id=1), follow_redirects=True)
     assert response.status_code == 201
 
 
 def test_delete_unit(client):
     """Test API can delete an existing unit. (DELETE request)."""
-    response = client.delete("/unit/3")
+    response = client.delete("/unit/"+str(ID))
     assert response.status_code == 200
