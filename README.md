@@ -32,21 +32,20 @@ Features
 Usage
 *****
 
-*Remember only to follow those instructions after editing the source code to bootstrap your new
-project.*
-
+<p>
+  <h3>Initial Setup</h3>
+  Start by creating and activate a virtual environment. <br/><br/>
+  Next, Install the dependencies in requirements.txt file <br/>
+  <pre><code> pip install -r requirements.txt</code></pre>
+</p>
+<p>
 
 ### Run the application
 
-```shell
-pipenv install
-pipenv shell
-flask run
-```
+inside the digeiz_api run the app.py
+<pre><code> python app.py</code></pre>
 
 ### Run test suite
 
-```shell
-pipenv shell
-tox
-```
+inside the digeiz_api run the app.py
+<pre><code> python -m pytest</code></pre>
